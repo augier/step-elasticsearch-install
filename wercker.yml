@@ -8,7 +8,7 @@ build:
 
     - script:
         name: Upgrade apt-get
-        code: apt-get upgrade
+        code: sudo apt-get upgrade
 
     - script:
         name: Get elasticsearch
