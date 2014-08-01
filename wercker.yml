@@ -2,10 +2,19 @@ box: wercker/default
 build:
   steps:
 
-    #- elasticsearch-install
-    script: |
-            sudo apt-get update
-            sudo apt-get upgrade
-            sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
-            sudo dpkg -i /tmp/elasticsearch-0.90.2.deb
-            sudo sed -i 's/# http.enabled: false/http.enabled: true/g' /etc/elasticsearch/elasticsearch.yml
+    - script:
+        name: Update apt-get
+        code: sudo apt-get update
+
+    - script:
+        name: Upgrade apt-get
+        code: apt-get upgrade
+
+    - script:
+        name: Get elasticsearch
+        code: sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
+
+    - script:
+        name: Unpackage elasticsearch
+        code: dpkg -i /tmp/elasticsearch-0.90.2.deb
+
