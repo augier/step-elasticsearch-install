@@ -8,9 +8,9 @@ build:
             sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
             sudo dpkg -i /tmp/elasticsearch-0.90.2.deb
             sudo sed -i 's/# http.enabled: false/http.enabled: true/g' /etc/elasticsearch/elasticsearch.yml
-            sudo sed -i 's/# network.host: localhost/network.host: $$HOST$$/g' /etc/elasticsearch/elasticsearch.yml
-
 
     - script:
         name: Test elasticsearch
         code: curl -I 'http://localhost:9200/_status'
+
+        # #sudo sed -i 's/# network.host: localhost/network.host: $$HOST$$/g' /etc/elasticsearch/elasticsearch.yml
