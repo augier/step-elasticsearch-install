@@ -1,20 +1,21 @@
 box: wercker/default
 build:
   steps:
+    - validate-wercker-step
+    # - script:
+    #     name: Update apt-get
+    #     code: sudo apt-get update
 
-    - script:
-        name: Update apt-get
-        code: sudo apt-get update
+    # - script:
+    #     name: Upgrade apt-get
+    #     code: sudo apt-get upgrade
 
-    - script:
-        name: Upgrade apt-get
-        code: sudo apt-get upgrade
+    # - script:
+    #     name: Get elasticsearch
+    #     code: sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
 
-    - script:
-        name: Get elasticsearch
-        code: sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
+    # - script:
+    #     name: Unpackage elasticsearch
+    #     code: dpkg -i /tmp/elasticsearch-0.90.2.deb
 
-    - script:
-        name: Unpackage elasticsearch
-        code: dpkg -i /tmp/elasticsearch-0.90.2.deb
 
