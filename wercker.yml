@@ -10,3 +10,7 @@ build:
             sudo sed -i 's/# http.enabled: false/http.enabled: true/g' /etc/elasticsearch/elasticsearch.yml
             sudo sed -i 's/# network.host: 192.168.0.1/network.host: $$HOST$$/g' /etc/elasticsearch/elasticsearch.yml
 
+
+    - script:
+        name: Test elasticsearch
+        code: curl -I 'http://localhost:9200/_status'
