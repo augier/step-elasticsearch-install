@@ -1,4 +1,7 @@
-sudo apt-get update
-sudo apt-get upgrade
-sudo wget -O /tmp/elasticsearch-0.90.2.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.2.deb
-sudo dpkg -i /tmp/elasticsearch-0.90.2.deb
+if [ ! -n "$WERCKER_ELASTICSEARCH_INSTALL_VERSION" ]; then
+  error 'Please specify elasticsearch version'
+  exit 1
+fi
+
+sudo wget -O /tmp/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb
+sudo dpkg -i /tmp/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb
