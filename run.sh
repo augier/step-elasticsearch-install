@@ -3,7 +3,14 @@ if [ ! -n "$WERCKER_ELASTICSEARCH_INSTALL_VERSION" ]; then
   exit 1
 fi
 
-sudo wget -O /tmp/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb
-sudo dpkg -i /tmp/elasticsearch-$WERCKER_ELASTICSEARCH_INSTALL_VERSION.deb
-sudo sed -i 's/# http.enabled: false/http.enabled: true/g' /etc/elasticsearch/elasticsearch.yml
-sudo sed -i 's/# network.host: 192.168.0.1/network.host: $$HOST$$/g' /etc/elasticsearch/elasticsearch.yml
+sudo wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+sudo echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+sudo echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections
+sudo add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.0/debian stable main"
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java7-installer
+sudo apt-get install elasticsearch
+sudo echo "network.bind_host: 127.0.0.1" >>  /etc/elasticsearch/elasticsearch.yml
+sudo echo "script.disable_dynamic: true" >>  /etc/elasticsearch/elasticsearch.yml
+sudo service elasticsearch restart
